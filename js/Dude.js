@@ -28,8 +28,7 @@
         //  Tell the Weapon to track the 'player' Sprite, offset by 14px horizontally, 0 vertically
         this.weapon.trackSprite(this, 0, 0, true);        
         
-        this.weapon.onFire.add(animationStarted, this);        
-        //game.add.existing(this);       
+        //this.weapon.onFire.addOnce(animationStarted, this);                
     }
 
     Dude.prototype = Object.create(Phaser.Sprite.prototype);
@@ -87,6 +86,6 @@
     }
 
     function animationStarted(sprite, animation) {
-        game.add.text(32, 32, 'Animation started', { fill: 'white' });
+        game.add.text(this.x, this.y, 'P', { fill: 'white' });
     }
     /* ---------------------------------------------------------------------------------------- */       

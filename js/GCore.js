@@ -17,7 +17,7 @@
     var soldiers;       
     var enemies;           
     var enemiesAlive = 0;      
-    var MAX_ENEMIES = 9;
+    var MAX_ENEMIES = 15;
     var showDebug = false;
     var bullets; 
     var bulletTime = 0;    
