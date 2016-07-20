@@ -32,10 +32,13 @@
             return true;
         }
         return false;
-    }
+    }    
 
-    Enemy.prototype.update = function(){                  
-        this.rotation = game.physics.arcade.moveToObject(this, this.player, this.speed); 
+    Enemy.prototype.update = function(){ 
+        if(this.player.alive){
+            this.rotation = game.physics.arcade.moveToObject(this, this.player, this.speed);     
+        }                 
+        
         /*
         var chasing = false; 
         // check if the slime's y position on the map is equal to the player's y position

@@ -12,7 +12,7 @@
         this.body.collideWorldBounds = true;
         this.body.bounce.set(1);        
 
-        this.weapon = game.add.weapon(30, 'bullets');
+        this.weapon = game.add.weapon(30, 'bullet');
         //  The bullet will be automatically killed when it leaves the world bounds
         this.weapon.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS;      
         //  Because our bullet is drawn facing up, we need to offset its rotation:
@@ -32,7 +32,7 @@
     Dude.prototype = Object.create(Phaser.Sprite.prototype);
     Dude.prototype.constructor = Dude;
     Dude.prototype.targeting = function(){
-        if(enemies.countLiving()>0){
+        if(enemies.countLiving()>0 && this.alive){
             this.rotation = game.physics.arcade.moveToObject(this, enemies.getClosestTo(this), this.speed);         
             this.weapon.fire();
         }            
