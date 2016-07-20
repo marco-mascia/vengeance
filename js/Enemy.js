@@ -10,7 +10,8 @@
         this.anchor.setTo(0.5, 0.5);      
         this.health = 2;        
         this.alive = true;                 
-        this.player = player;
+        //this.player = player;
+        //this.player = dude.getClosestTo(this);
         this.speed = game.rnd.integerInRange(10, 200); 
 
         /* health label */
@@ -35,9 +36,13 @@
     }    
 
     Enemy.prototype.update = function(){ 
-        if(this.player.alive){
-            this.rotation = game.physics.arcade.moveToObject(this, this.player, this.speed);     
-        }                 
+        
+        if(soldiers.countLiving()>0 && this.alive){           
+            this.rotation = game.physics.arcade.moveToObject(this, soldiers.getClosestTo(this), this.speed);     
+        }   
+
+        game.physics.arcade.overlap(this, soldiers, nomnom, null, this);  
+                        
         
         /*
         var chasing = false; 
@@ -70,4 +75,8 @@
         */        
 
     };
+
+    function nomnom(){
+        arguments[0].kill();                
+    }
     /* ---------------------------------------------------------------------------------------- */

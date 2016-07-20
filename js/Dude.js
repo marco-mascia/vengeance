@@ -1,16 +1,18 @@
 /* DUDE */
     /* ---------------------------------------------------------------------------------------- */
-    Dude = function(index, game){       
+    Dude = function(index, game, x, y){       
         
-        Phaser.Sprite.call(this, game, game.world.centerX, game.world.centerY, 'dude');        
+        Phaser.Sprite.call(this, game, x, y, 'dude');        
         this.anchor.setTo(0.5, 0.5);
         this.health = 10;
         this.alive = true;   
         this.speed = 0;  
 
+        /*
         game.physics.enable(this, Phaser.Physics.ARCADE);   
         this.body.collideWorldBounds = true;
         this.body.bounce.set(1);        
+        */
 
         this.weapon = game.add.weapon(30, 'bullet');
         //  The bullet will be automatically killed when it leaves the world bounds
@@ -24,22 +26,22 @@
         //  Add a variance to the bullet angle by +- this value
         this.weapon.bulletAngleVariance = 10;
         //  Tell the Weapon to track the 'player' Sprite, offset by 14px horizontally, 0 vertically
-        this.weapon.trackSprite(this, 0, 0, true);
-
-        game.add.existing(this);       
+        this.weapon.trackSprite(this, 0, 0, true);        
+        
+        this.weapon.onFire.add(animationStarted, this);        
+        //game.add.existing(this);       
     }
 
     Dude.prototype = Object.create(Phaser.Sprite.prototype);
     Dude.prototype.constructor = Dude;
-    Dude.prototype.targeting = function(){
-        if(enemies.countLiving()>0 && this.alive){
-            this.rotation = game.physics.arcade.moveToObject(this, enemies.getClosestTo(this), this.speed);         
-            this.weapon.fire();
-        }            
-    }
 
     Dude.prototype.update = function(){
-        
+        if(enemies.countLiving()>0 && this.alive){
+            this.rotation = game.physics.arcade.moveToObject(this, enemies.getClosestTo(this), this.speed);         
+            this.weapon.fire();            
+        }    
+
+        game.physics.arcade.overlap(this.weapon.bullets, enemies, collisionHandler, null, this); 
         //enemies.getClosestTo(this).tint = 0xFF0000;       
 
         /*
@@ -69,4 +71,22 @@
         }
         */
     };
+
+    function collisionHandler() {             
+        //enemy damage
+        var destroyed = arguments[1].damage();        
+        if (destroyed){
+            /*
+            var explosionAnimation = explosions.getFirstExists(false);
+            explosionAnimation.reset(tank.x, tank.y);
+            explosionAnimation.play('kaboom', 30, false, true);
+            */
+        }
+        //bullet
+        arguments[0].kill();                 
+    }
+
+    function animationStarted(sprite, animation) {
+        game.add.text(32, 32, 'Animation started', { fill: 'white' });
+    }
     /* ---------------------------------------------------------------------------------------- */       

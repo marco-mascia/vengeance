@@ -13,7 +13,8 @@
     
     var map;
     var layer;
-    var dude;        
+    //var dude, dude2;  
+    var soldiers;       
     var enemies;           
     var enemiesAlive = 0;      
     var MAX_ENEMIES = 9;
@@ -46,43 +47,25 @@
         layer = map.createLayer(0);
 
         /* dude */
-        dude = new Dude(0, game);               
+        soldiers = game.add.physicsGroup(Phaser.Physics.ARCADE);
+        soldiers.add(new Dude(0, game, game.world.centerX, game.world.centerY));
+        soldiers.add(new Dude(0, game, game.world.centerX + 50, game.world.centerY));
 
         /* enemies */           
         enemies = game.add.physicsGroup(Phaser.Physics.ARCADE);
 
         for (var i = 0; i < MAX_ENEMIES; i++) {
-            enemies.add(new Enemy(i, game, dude));                  
+            enemies.add(new Enemy(i, game));                  
         }
         enemies.setAll('body.collideWorldBounds', true);
         enemies.setAll('body.bounce.x', 1);
         enemies.setAll('body.bounce.y', 1);
     }
 
-    function update(){           
-      game.physics.arcade.overlap(dude.weapon.bullets, enemies, collisionHandler, null, this);       
-      game.physics.arcade.overlap(enemies, dude, nomnom, null, this);  
-      game.physics.arcade.collide(enemies);
-      dude.targeting();       
+    function update(){         
+      game.physics.arcade.collide(enemies);                 
     }
-
-    function nomnom(){
-        arguments[0].kill();                
-    }
-
-    function collisionHandler() {             
-        //enemy damage
-        var destroyed = arguments[1].damage();        
-        if (destroyed){
-            /*
-            var explosionAnimation = explosions.getFirstExists(false);
-            explosionAnimation.reset(tank.x, tank.y);
-            explosionAnimation.play('kaboom', 30, false, true);
-            */
-        }
-        //bullet
-        arguments[0].kill();                 
-    }
+    
 	
 	function render() {
         if (showDebug){
