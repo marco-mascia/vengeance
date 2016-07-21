@@ -37,29 +37,39 @@
     Dude.prototype.constructor = Dude;
 
     Dude.prototype.update = function(){
-
         // Targeting        
         if(enemies.countLiving()>0 && this.alive){
-            this.rotation = game.physics.arcade.moveToObject(this, enemies.getClosestTo(this), this.speed);   
-            this.weapon.fire();                    
+            this.rotation = game.physics.arcade.moveToObject(this, enemies.getClosestTo(this), this.speed);                                 
         }    
 
         // Bullet collision
         game.physics.arcade.collide(this.weapon.bullets, enemies, collisionHandler, null, this); 
 
         //line of sight
-        /*
-        var closestEnemy = enemies.getClosestTo(this)
-        var angleBetween = game.physics.arcade.angleBetween(this, closestEnemy);
-        var currentAngle = this.position;
-        closestEnemy.tint = 0xFF0000;   
+        // Ray casting!
+        // Test if each soldier can see the enemy by casting a ray (a line) towards the enemy.   
+        enemies.forEach(function(enemy) {
+            // Define a line that connects the soldier to the enemy
+            // This isn't drawn on screen. This is just mathematical representation
+            // of a line to make our calculations easier. 
+            var ray = new Phaser.Line(enemy.x, enemy.y, this.x, this.y);
 
-        if(angleBetween < currentAngle + 0.785 && angleBetween < currentAngle - 0.785){
-            closestEnemy.tint = 0xFF00FF;   
-        }
-        */
+            // Test if any walls intersect the ray
+            var intersect = this.getWallIntersection(ray);
 
-        //enemies.getClosestTo(this).tint = 0xFF0000;       
+            if (intersect) {
+                //no sight here
+                enemy.tint = 0xffffff;
+            } else {
+                // This soldier can see the enemy so fire!
+                enemy.tint = 0xffaaaa;
+                if(enemy.alive){
+                    this.weapon.fire(); 
+                }             
+            }
+
+        }, this);
+
         /*
         if (game.input.mousePointer.isDown){
             //  400 is the speed it will move towards the mouse
@@ -100,6 +110,45 @@
             arguments[0].kill();                 
         }
     };
+
+    // Given a ray, this function iterates through all of the walls and
+    // returns the closest wall intersection from the start of the ray
+    // or null if the ray does not intersect any walls.
+    Dude.prototype.getWallIntersection = function(ray) {
+        var distanceToWall = Number.POSITIVE_INFINITY;
+        var closestIntersection = null;
+
+        // For each of the walls...
+        walls.forEach(function(wall) {
+            // Create an array of lines that represent the four edges of each wall
+            var lines = [
+                new Phaser.Line(wall.x, wall.y, wall.x + wall.width, wall.y),
+                new Phaser.Line(wall.x, wall.y, wall.x, wall.y + wall.height),
+                new Phaser.Line(wall.x + wall.width, wall.y,
+                    wall.x + wall.width, wall.y + wall.height),
+                new Phaser.Line(wall.x, wall.y + wall.height,
+                    wall.x + wall.width, wall.y + wall.height)
+            ];
+
+            // Test each of the edges in this wall against the ray.
+            // If the ray intersects any of the edges then the wall must be in the way.
+            for(var i = 0; i < lines.length; i++) {
+                var intersect = Phaser.Line.intersects(ray, lines[i]);
+                if (intersect) {
+                    // Find the closest intersection
+                    distance =
+                        game.math.distance(ray.start.x, ray.start.y, intersect.x, intersect.y);
+                    if (distance < distanceToWall) {
+                        distanceToWall = distance;
+                        closestIntersection = intersect;
+                    }
+                }
+            }
+        }, this);
+
+        return closestIntersection;
+    };
+
 
    
 

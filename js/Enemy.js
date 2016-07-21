@@ -28,6 +28,7 @@
         if (this.health <= 0){
             this.alive = false;            
             this.kill();
+            enemies.removeChild(this);
             return true;
         }
         return false;

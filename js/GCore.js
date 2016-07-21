@@ -59,7 +59,7 @@
         walls.setAll('body.collideWorldBounds', true);  
         walls.setAll('body.immovable', true);
         walls.setAll('body.bounce.x', 1);
-        walls.setAll('body.bounce.y', 1);
+        walls.setAll('body.bounce.y', 1); 
 
         /* dude */
         soldiers = game.add.physicsGroup(Phaser.Physics.ARCADE);
