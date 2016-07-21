@@ -9,10 +9,12 @@
         game.load.image('muzzle-flash', 'assets/sprites/muzzle-flash.png');
         //map tiles
         game.load.image('ground_1x1', 'assets/tiles/ground_1x1.png');
-        game.load.image('walls_1x2', 'assets/tiles/walls_1x2.png');
+
+        //game.load.image('walls_1x2', 'assets/tiles/walls_1x2.png');
+        game.load.spritesheet('walls_1x2', 'assets/tiles/walls_1x2.png', 32, 64);
     }    
     
-    var map;
+    var map;    
     var layer;    
     var soldiers;       
     var enemies;          
@@ -46,6 +48,7 @@
         map = game.add.tilemap('dynamicMap', 32, 32);
         //  'tiles' = cache image key, 32x32 = tile size
         map.addTilesetImage('ground_1x1', 'ground_1x1', 32, 32);
+
         //  0 is important
         layer = map.createLayer(0);                
         walls = game.add.physicsGroup(Phaser.Physics.ARCADE);
