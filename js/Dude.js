@@ -1,4 +1,4 @@
-/* DUDE */
+    /* DUDE */
     /* ---------------------------------------------------------------------------------------- */
     Dude = function(index, game, x, y, rotation){       
         
@@ -35,6 +35,17 @@
 
     Dude.prototype = Object.create(Phaser.Sprite.prototype);
     Dude.prototype.constructor = Dude;
+    Dude.prototype.damage = function(){
+        //console.log('damage: ', this.health);
+        this.health -= 1;
+        if (this.health <= 0){
+            this.alive = false;            
+            this.kill();
+            soldiers.removeChild(this);
+            return true;
+        }
+        return false;
+    } 
 
     Dude.prototype.update = function(){
         // Targeting        
@@ -59,10 +70,10 @@
 
             if (intersect) {
                 //no sight here
-                enemy.tint = 0xffffff;
+                //enemy.tint = 0xffffff;
             } else {
                 // This soldier can see the enemy so fire!
-                enemy.tint = 0xffaaaa;
+                enemy.tint = 0xff00aa;
                 if(enemy.alive){
                     this.weapon.fire(); 
                 }             

@@ -73,10 +73,12 @@
             //this.animations.play('left');
         }
         */        
+        function nomnom(){
+            console.log('NOM NOM YOU!');
+            arguments[1].damage();                
+        }
 
     };
 
-    function nomnom(){
-        arguments[0].kill();                
-    }
+    
     /* ---------------------------------------------------------------------------------------- */

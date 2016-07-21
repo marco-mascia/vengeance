@@ -8,9 +8,7 @@
         game.load.image('bullet', 'assets/sprites/bullet.png');
         game.load.image('muzzle-flash', 'assets/sprites/muzzle-flash.png');
         //map tiles
-        game.load.image('ground_1x1', 'assets/tiles/ground_1x1.png');
-
-        //game.load.image('walls_1x2', 'assets/tiles/walls_1x2.png');
+        game.load.image('ground_1x1', 'assets/tiles/ground_1x1.png');        
         game.load.spritesheet('walls_1x2', 'assets/tiles/walls_1x2.png', 32, 64);
     }    
     
@@ -19,7 +17,7 @@
     var soldiers;       
     var enemies;          
     var enemiesAlive = 0;      
-    var MAX_ENEMIES = 15;
+    var MAX_ENEMIES = 20;
     var showDebug = false;
     var bullets; 
     var bulletTime = 0; 
