@@ -28,7 +28,7 @@
         //  Add a variance to the bullet angle by +- this value
         this.weapon.bulletAngleVariance = 10;
         //  Tell the Weapon to track the 'player' Sprite, offset by 14px horizontally, 0 vertically
-        this.weapon.trackSprite(this, 0, 0, true);        
+        this.weapon.trackSprite(this, 0, 18, true);        
         
         //this.weapon.onFire.addOnce(animationStarted, this);                
     }
@@ -40,12 +40,12 @@
 
         // Targeting        
         if(enemies.countLiving()>0 && this.alive){
-            //this.rotation = game.physics.arcade.moveToObject(this, enemies.getClosestTo(this), this.speed);   
-            //this.weapon.fire();                    
+            this.rotation = game.physics.arcade.moveToObject(this, enemies.getClosestTo(this), this.speed);   
+            this.weapon.fire();                    
         }    
 
         // Bullet collision
-        game.physics.arcade.overlap(this.weapon.bullets, enemies, collisionHandler, null, this); 
+        game.physics.arcade.collide(this.weapon.bullets, enemies, collisionHandler, null, this); 
 
         //line of sight
         /*
@@ -86,21 +86,22 @@
             }
         }
         */
+         function collisionHandler(){                
+            //enemy damage            
+            var destroyed = arguments[1].damage();        
+            if (destroyed){
+                /*
+                var explosionAnimation = explosions.getFirstExists(false);
+                explosionAnimation.reset(tank.x, tank.y);
+                explosionAnimation.play('kaboom', 30, false, true);
+                */
+            }
+            //bullet
+            arguments[0].kill();                 
+        }
     };
 
-    function collisionHandler() {             
-        //enemy damage
-        var destroyed = arguments[1].damage();        
-        if (destroyed){
-            /*
-            var explosionAnimation = explosions.getFirstExists(false);
-            explosionAnimation.reset(tank.x, tank.y);
-            explosionAnimation.play('kaboom', 30, false, true);
-            */
-        }
-        //bullet
-        arguments[0].kill();                 
-    }
+   
 
     function animationStarted(sprite, animation) {
         game.add.text(this.x, this.y, 'P', { fill: 'white' });

@@ -13,8 +13,7 @@
     }    
     
     var map;
-    var layer;
-    //var dude, dude2;  
+    var layer;    
     var soldiers;       
     var enemies;          
     var enemiesAlive = 0;      
@@ -23,7 +22,7 @@
     var bullets; 
     var bulletTime = 0; 
 
-    var NUMBER_OF_WALLS = 4;
+    var NUMBER_OF_WALLS = 10;
     var walls;   
 
     function create() {
@@ -48,21 +47,19 @@
         //  'tiles' = cache image key, 32x32 = tile size
         map.addTilesetImage('ground_1x1', 'ground_1x1', 32, 32);
         //  0 is important
-        layer = map.createLayer(0);
-
-        
+        layer = map.createLayer(0);                
         walls = game.add.physicsGroup(Phaser.Physics.ARCADE);
-        walls.setAll('body.collideWorldBounds', true);
         
         var i, x, y;
         for(i = 0; i < NUMBER_OF_WALLS; i++) {
             x = i * game.width/NUMBER_OF_WALLS + 50;
-            y = game.rnd.integerInRange(50, game.height - 200);
-
-            walls.add(new Obstacle(i, game, x, y));       
-            //game.add.tileSprite(i, x, y, 64, 64, 'walls_1x2', 1);
-        }       
-
+            y = game.rnd.integerInRange(50, game.height - 100);
+            walls.add(new Obstacle(i, game, x, y));                   
+        }    
+        walls.setAll('body.collideWorldBounds', true);  
+        walls.setAll('body.immovable', true);
+        walls.setAll('body.bounce.x', 1);
+        walls.setAll('body.bounce.y', 1);
 
         /* dude */
         soldiers = game.add.physicsGroup(Phaser.Physics.ARCADE);
@@ -80,17 +77,13 @@
         enemies.setAll('body.bounce.y', 1);
     }
 
-    function update(){         
-      game.physics.arcade.collide(enemies);                 
-      //game.physics.arcade.collide(this.walls);
-    }
-    
+    function update(){}    
 	
-	function render() {
-        if (showDebug){
-            game.debug.bodyInfo(dude, 32, 32);
-            game.debug.body(dude);
-            enemies.forEach(debug, this);        
+	function render(){
+        if (showDebug){            
+            soldiers.forEach(debug, this);  
+            enemies.forEach(debug, this);  
+            walls.forEach(debug, this);        
         }
     }
 
@@ -98,9 +91,3 @@
         game.debug.bodyInfo(item, 32, 32);
         game.debug.body(item); 
     }
-
-
-
-
-
-

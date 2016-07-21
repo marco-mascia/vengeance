@@ -39,7 +39,8 @@
             this.rotation = game.physics.arcade.moveToObject(this, soldiers.getClosestTo(this), this.speed);     
         }   
 
-        game.physics.arcade.overlap(this, soldiers, nomnom, null, this);  
+        game.physics.arcade.overlap(this, soldiers, nomnom, null, this); 
+        game.physics.arcade.collide(enemies);
                         
         
         /*
