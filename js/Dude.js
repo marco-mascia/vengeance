@@ -1,12 +1,14 @@
 /* DUDE */
     /* ---------------------------------------------------------------------------------------- */
-    Dude = function(index, game, x, y){       
+    Dude = function(index, game, x, y, rotation){       
         
         Phaser.Sprite.call(this, game, x, y, 'dude');        
         this.anchor.setTo(0.5, 0.5);
         this.health = 10;
         this.alive = true;   
-        this.speed = 0;  
+        this.speed = 0;
+        rotation = typeof rotation !== 'undefined' ? rotation : 0;
+        this.rotation = rotation;
 
         /*
         game.physics.enable(this, Phaser.Physics.ARCADE);   
@@ -35,14 +37,29 @@
     Dude.prototype.constructor = Dude;
 
     Dude.prototype.update = function(){
+
+        // Targeting        
         if(enemies.countLiving()>0 && this.alive){
-            this.rotation = game.physics.arcade.moveToObject(this, enemies.getClosestTo(this), this.speed);         
-            this.weapon.fire();            
+            //this.rotation = game.physics.arcade.moveToObject(this, enemies.getClosestTo(this), this.speed);   
+            //this.weapon.fire();                    
         }    
 
+        // Bullet collision
         game.physics.arcade.overlap(this.weapon.bullets, enemies, collisionHandler, null, this); 
-        //enemies.getClosestTo(this).tint = 0xFF0000;       
 
+        //line of sight
+        /*
+        var closestEnemy = enemies.getClosestTo(this)
+        var angleBetween = game.physics.arcade.angleBetween(this, closestEnemy);
+        var currentAngle = this.position;
+        closestEnemy.tint = 0xFF0000;   
+
+        if(angleBetween < currentAngle + 0.785 && angleBetween < currentAngle - 0.785){
+            closestEnemy.tint = 0xFF00FF;   
+        }
+        */
+
+        //enemies.getClosestTo(this).tint = 0xFF0000;       
         /*
         if (game.input.mousePointer.isDown){
             //  400 is the speed it will move towards the mouse

@@ -10,8 +10,6 @@
         this.anchor.setTo(0.5, 0.5);      
         this.health = 2;        
         this.alive = true;                 
-        //this.player = player;
-        //this.player = dude.getClosestTo(this);
         this.speed = game.rnd.integerInRange(10, 200); 
 
         /* health label */

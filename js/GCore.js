@@ -9,18 +9,22 @@
         game.load.image('muzzle-flash', 'assets/sprites/muzzle-flash.png');
         //map tiles
         game.load.image('ground_1x1', 'assets/tiles/ground_1x1.png');
+        game.load.image('walls_1x2', 'assets/tiles/walls_1x2.png');
     }    
     
     var map;
     var layer;
     //var dude, dude2;  
     var soldiers;       
-    var enemies;           
+    var enemies;          
     var enemiesAlive = 0;      
     var MAX_ENEMIES = 15;
     var showDebug = false;
     var bullets; 
-    var bulletTime = 0;    
+    var bulletTime = 0; 
+
+    var NUMBER_OF_WALLS = 4;
+    var walls;   
 
     function create() {
         /* set stage */
@@ -36,7 +40,7 @@
             if (y < 39){
                 data += "\n";
             }
-        }
+        }       
 
         game.cache.addTilemap('dynamicMap', null, data, Phaser.Tilemap.CSV);
         //  Create our map (the 32x32 is the tile size)
@@ -46,10 +50,24 @@
         //  0 is important
         layer = map.createLayer(0);
 
+        
+        walls = game.add.physicsGroup(Phaser.Physics.ARCADE);
+        walls.setAll('body.collideWorldBounds', true);
+        
+        var i, x, y;
+        for(i = 0; i < NUMBER_OF_WALLS; i++) {
+            x = i * game.width/NUMBER_OF_WALLS + 50;
+            y = game.rnd.integerInRange(50, game.height - 200);
+
+            walls.add(new Obstacle(i, game, x, y));       
+            //game.add.tileSprite(i, x, y, 64, 64, 'walls_1x2', 1);
+        }       
+
+
         /* dude */
         soldiers = game.add.physicsGroup(Phaser.Physics.ARCADE);
-        soldiers.add(new Dude(0, game, game.world.centerX, game.world.centerY));
-        soldiers.add(new Dude(0, game, game.world.centerX + 50, game.world.centerY));
+        soldiers.add(new Dude(0, game, game.world.centerX, game.world.centerY, 1.57));
+        //soldiers.add(new Dude(0, game, game.world.centerX + 50, game.world.centerY, 1.57));
 
         /* enemies */           
         enemies = game.add.physicsGroup(Phaser.Physics.ARCADE);
@@ -64,6 +82,7 @@
 
     function update(){         
       game.physics.arcade.collide(enemies);                 
+      //game.physics.arcade.collide(this.walls);
     }
     
 	
