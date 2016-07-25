@@ -2,7 +2,16 @@
     /* ---------------------------------------------------------------------------------------- */
     Dude = function(index, game, x, y, rotation){       
         
-        Phaser.Sprite.call(this, game, x, y, 'dude');        
+        //Phaser.Sprite.call(this, game, x, y, 'dude');  
+
+        
+        //Phaser.Sprite.call(this, game, x, y, 'dude');  
+        Phaser.Sprite.call(this, game, x, y, 'dude_shotgun', 'sprESearchDoubleBarrel_0');  
+        
+               
+        
+        //this.animations.add('shoot', ['sprESearchDoubleBarrel_0.png', 'sprESearchDoubleBarrel_1.png', 'sprESearchDoubleBarrel_2.png', 'sprESearchDoubleBarrel_3.png', 'sprESearchDoubleBarrel_4.png', 'sprESearchDoubleBarrel_5.png'], 20, true);
+
         this.anchor.setTo(0.5, 0.5);
         this.health = 10;
         this.alive = true;   
@@ -30,7 +39,8 @@
         //  Tell the Weapon to track the 'player' Sprite, offset by 14px horizontally, 0 vertically
         this.weapon.trackSprite(this, 0, 18, true);        
         
-        //this.weapon.onFire.addOnce(animationStarted, this);                
+        //this.weapon.events.onFire.addOnce(function(){console.log('fire')}, this);     
+        //sprite.events.onAddedToGroup.add(yourFunction, this);
     }
 
     Dude.prototype = Object.create(Phaser.Sprite.prototype);
@@ -48,6 +58,14 @@
     } 
 
     Dude.prototype.update = function(){
+
+        /*
+        this.events.onFire.add(function(){
+            console.log('firing');
+        });
+        */
+        
+        
         // Targeting        
         if(enemies.countLiving()>0 && this.alive){
             this.rotation = game.physics.arcade.moveToObject(this, enemies.getClosestTo(this), this.speed);                                 
@@ -73,7 +91,7 @@
                 //enemy.tint = 0xffffff;
             } else {
                 // This soldier can see the enemy so fire!
-                enemy.tint = 0xff00aa;
+                //enemy.tint = 0xff00aa;
                 if(enemy.alive){
                     this.weapon.fire(); 
                 }             
@@ -167,3 +185,41 @@
         game.add.text(this.x, this.y, 'P', { fill: 'white' });
     }
     /* ---------------------------------------------------------------------------------------- */       
+
+
+
+/*
+    TestGame.Unit = function(game, x, y, faction, job) {
+        var frameIdx = faction * TestGame.jobs.length + job;
+        Phaser.Sprite.call(this, game, x, y, 'spritesheet-units', frameIdx);
+        this.name = 'unit';
+        this.events.onUnitSelected = new Phaser.Signal();
+        this.events.onUnitMoveSelect = new Phaser.Signal(); 
+        //INITIALIZATION 
+        this.inputEnabled = true;
+        this.input.useHandCursor = true;
+        this.events.onInputDown.add(this.select, this);
+        this.events.onInputUp.add(this.release, this);
+        return this;
+    };
+
+    TestGame.Unit.prototype = Object.create(Phaser.Sprite.prototype);
+    TestGame.Unit.prototype.constructor = TestGame.Unit;
+    TestGame.Unit.prototype.select = function() {
+        this.events.onUnitSelected.dispatch(this);
+    };
+    TestGame.Unit.prototype.selectMove = function() {
+        this.events.onUnitMoveSelect.dispatch(this);
+        this.game.input.onUp.add(this.processClickMove, this);
+    };
+    TestGame.Unit.prototype.processClickMove = function(pointer) {
+        if (pointer.duration <= 150) { // in case they are dragging        
+            this.moveTo({
+                x: pointer.worldX,
+                y: pointer.worldY
+            });
+            this.game.input.onUp.remove(this.processClickMove, this);
+        }
+    };
+    */
+

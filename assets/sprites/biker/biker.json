@@ -1,0 +1,52 @@
+{"frames": [
+
+{
+	"filename": "sprMCPushPig_5.png",
+	"frame": {"x":1,"y":1,"w":21,"h":23},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":5,"w":21,"h":23},
+	"sourceSize": {"w":32,"h":32}
+},
+{
+	"filename": "sprMCPushPig_6.png",
+	"frame": {"x":1,"y":26,"w":21,"h":23},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":5,"w":21,"h":23},
+	"sourceSize": {"w":32,"h":32}
+},
+{
+	"filename": "sprMCPushPig_7.png",
+	"frame": {"x":1,"y":51,"w":21,"h":23},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":5,"w":21,"h":23},
+	"sourceSize": {"w":32,"h":32}
+},
+{
+	"filename": "sprMCPushPig_8.png",
+	"frame": {"x":1,"y":76,"w":21,"h":23},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":5,"w":21,"h":23},
+	"sourceSize": {"w":32,"h":32}
+},
+{
+	"filename": "sprMCPushPig_9.png",
+	"frame": {"x":1,"y":101,"w":15,"h":26},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":3,"w":15,"h":26},
+	"sourceSize": {"w":32,"h":32}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "biker.png",
+	"format": "RGBA8888",
+	"size": {"w":23,"h":128},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:040037fdddb36576efd7406f38f424cb:b5a967b8420af3db8d1f945925bcb037:7da9b6cebd4a21805a07fd9a87262746$"
+}
+}

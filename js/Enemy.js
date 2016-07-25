@@ -75,6 +75,9 @@
         */        
         function nomnom(){
             console.log('NOM NOM YOU!');
+
+            //this.animations.add('attack', [0,6], 10, true);
+            //this.animations.play('attack', 30, true);
             arguments[1].damage();                
         }
 

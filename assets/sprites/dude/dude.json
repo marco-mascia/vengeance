@@ -1,0 +1,92 @@
+{"frames": [
+
+{
+	"filename": "sprESearchDoubleBarrel_0",
+	"frame": {"x":0,"y":0,"w":44,"h":24},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":44,"h":24},
+	"sourceSize": {"w":44,"h":24}
+},
+{
+	"filename": "sprESearchDoubleBarrel_1.png",
+	"frame": {"x":44,"y":0,"w":44,"h":24},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":44,"h":24},
+	"sourceSize": {"w":44,"h":24}
+},
+{
+	"filename": "sprESearchDoubleBarrel_2.png",
+	"frame": {"x":88,"y":0,"w":44,"h":24},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":44,"h":24},
+	"sourceSize": {"w":44,"h":24}
+},
+{
+	"filename": "sprESearchDoubleBarrel_3.png",
+	"frame": {"x":132,"y":0,"w":44,"h":24},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":44,"h":24},
+	"sourceSize": {"w":44,"h":24}
+},
+{
+	"filename": "sprESearchDoubleBarrel_4.png",
+	"frame": {"x":176,"y":0,"w":44,"h":24},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":44,"h":24},
+	"sourceSize": {"w":44,"h":24}
+},
+{
+	"filename": "sprESearchDoubleBarrel_5.png",
+	"frame": {"x":220,"y":0,"w":44,"h":24},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":44,"h":24},
+	"sourceSize": {"w":44,"h":24}
+},
+{
+	"filename": "sprESearchDoubleBarrel_6.png",
+	"frame": {"x":264,"y":0,"w":44,"h":24},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":44,"h":24},
+	"sourceSize": {"w":44,"h":24}
+},
+{
+	"filename": "sprESearchDoubleBarrel_7.png",
+	"frame": {"x":308,"y":0,"w":44,"h":24},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":44,"h":24},
+	"sourceSize": {"w":44,"h":24}
+},
+{
+	"filename": "sprESearchDoubleBarrel_8.png",
+	"frame": {"x":352,"y":0,"w":44,"h":24},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":44,"h":24},
+	"sourceSize": {"w":44,"h":24}
+},
+{
+	"filename": "sprESearchDoubleBarrel_9.png",
+	"frame": {"x":396,"y":0,"w":44,"h":24},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":44,"h":24},
+	"sourceSize": {"w":44,"h":24}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "dude.png",
+	"format": "RGBA8888",
+	"size": {"w":440,"h":24},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:5de37cbb6ebe49e9c9d14cf1caeb8964:b7cc5497d7e6ae83b42ed81c77740a8a:91b0136f103a2ad004f02a846859646f$"
+}
+}

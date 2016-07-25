@@ -10,6 +10,10 @@
         //map tiles
         game.load.image('ground_1x1', 'assets/tiles/ground_1x1.png');        
         game.load.spritesheet('walls_1x2', 'assets/tiles/walls_1x2.png', 32, 64);
+
+        game.load.atlas('dude_shotgun', 'assets/sprites/dude/dude.png', 'assets/sprites/dude/dude.json');
+
+        
     }    
     
     var map;    
@@ -65,7 +69,7 @@
         /* dude */
         soldiers = game.add.physicsGroup(Phaser.Physics.ARCADE);
         soldiers.add(new Dude(0, game, game.world.centerX, game.world.centerY, 1.57));
-        //soldiers.add(new Dude(0, game, game.world.centerX + 50, game.world.centerY, 1.57));
+        soldiers.add(new Dude(0, game, game.world.centerX + 50, game.world.centerY, 1.57));
 
         /* enemies */           
         enemies = game.add.physicsGroup(Phaser.Physics.ARCADE);
